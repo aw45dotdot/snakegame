@@ -1,0 +1,66 @@
+import turtle
+import random
+import time
+
+scr = turtle.Screen()
+scr.bgcolor("white")
+
+
+score = 0
+
+#pens
+snk = turtle.Turtle()
+snk.shape("square")
+snk.color("black")
+
+pen = turtle.Turtle() # for score
+
+a = turtle.Turtle() # for food
+a.shape("circle")
+a.color("red")  # food color
+
+snk.color("blue")  # pen color
+ 
+t.direction = ""  # to store the direction of snake
+
+# user def functions
+def go_up():
+    snk.direction = "up"    
+
+def go_dwn():
+    snk.direction = "down"
+
+def go_lft():
+    snk.direction = "left"
+
+def go_rt():
+    snk.direction = "right"
+
+# linking the keys with the function
+scr.listen()
+scr.onkey(go_up, "w")
+scr.onkey(go_dwn, "s")
+scr.onkey(go_lft, "a")
+scr.onkey(go_rt, "d")
+
+# moving function
+def move():
+    if snk.direction == "up":
+        y = snk.ycor()
+        snk.sety(y + 5) 
+    if snk.direction == "down":
+        y = snk.ycor()
+        snk.sety(y - 5)
+    if snk.direction == "left":
+        x = snk.xcor()
+        snk.setx(x - 5)
+    if snk.direction == "right":
+        x = snk.xcor()
+        snk.setx(x + 5)
+
+def check():
+   global score 
+   d = snk.distance(a)
+   if d < 15:
+       x = random.randint(-100,100)
+       y = random.randint(-100,100)
