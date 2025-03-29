@@ -1,0 +1,99 @@
+import turtle
+import random
+import time
+
+scr = turtle.Screen()
+scr.bgcolor("white")
+
+
+score = 0
+
+#pens
+snk = turtle.Turtle()
+snk.shape("square")
+snk.color("black")
+
+pen = turtle.Turtle() # for score
+
+a = turtle.Turtle() # for food
+a.shape("circle")
+a.color("red")  # food color
+
+snk.color("blue")  # pen color
+ 
+snk.direction = ""  # to store the direction of snake
+
+# user def functions
+def go_up():
+    snk.direction = "up"    
+
+def go_dwn():
+    snk.direction = "down"
+
+def go_lft():
+    snk.direction = "left"
+
+def go_rt():
+    snk.direction = "right"
+
+# linking the keys with the function
+scr.listen()
+scr.onkey(go_up, "Up")
+scr.onkey(go_dwn, "Down")
+scr.onkey(go_lft, "Left")
+scr.onkey(go_rt, "Right")
+
+# moving function
+def move():
+    if snk.direction == "up":
+        y = snk.ycor()
+        snk.sety(y + 5) 
+    if snk.direction == "down":
+        y = snk.ycor()
+        snk.sety(y - 5)
+    if snk.direction == "left":
+        x = snk.xcor()
+        snk.setx(x - 5)
+    if snk.direction == "right":
+        x = snk.xcor()
+        snk.setx(x + 5)
+
+def check():
+   global score 
+   d = snk.distance(a)
+   if d < 15:
+       x = random.randint(-100,100)
+       y = random.randint(-100,100)
+       a.goto(x,y)
+       score += 1
+       print(score)
+       pen.up()
+       pen.goto(100,100)
+       pen.down()
+       pen.clear()
+       pen.write(score, font=("Arial",30,"bold")
+
+       # snake body to grow
+       new = turtle.Turtle()
+       new.shape("square")
+       new.color("grey")
+       pen.up()
+       snakes.append(new)
+
+
+#list snakes
+snakes = []
+while True:
+    scr.update()
+    move()
+    check()
+    if len(snakes) > 0:
+        x = snk.xcor()
+        y = snk.ycor()
+        snakes[0].goto(x,y)
+    
+    #grow snake body
+    for i in range(len(snakes) -1,0,-1):
+        x = snakes[i-1].xcor()
+        y = snakes[i-1].ycor()
+        snakes[i].goto(x,y)
